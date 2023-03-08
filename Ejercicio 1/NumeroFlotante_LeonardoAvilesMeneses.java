@@ -3,6 +3,8 @@ import java.util.Scanner;
 public class NumeroFlotante_LeonardoAvilesMeneses {
 
     public static void main(String[] args) {	
+
+        Scanner scanner = new Scanner(System.in);
         
         //crear metodo que permita mostrar la parte entera y la parte en en decimal por separado de un float
 
@@ -22,7 +24,7 @@ public class NumeroFlotante_LeonardoAvilesMeneses {
         //se imprimen los valores por consola
 
         System.out.println("La parte entera del numero: "+ numeroPrincipal+ "es: "+parteEntera+" y la parte decimal es: "+parteDecimal);
-
+        String a =scanner.nextLine();
 	}
 
     
