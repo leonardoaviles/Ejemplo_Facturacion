@@ -20,6 +20,10 @@ public class ProductsModel implements Serializable{
     private String nombre;
     private int precio;
     
+    public ProductsModel(){
+        
+    }
+
     public ProductsModel(int pkProducto, String nombre, int precio) {
         this.pkProducto = pkProducto;
         this.nombre = nombre;

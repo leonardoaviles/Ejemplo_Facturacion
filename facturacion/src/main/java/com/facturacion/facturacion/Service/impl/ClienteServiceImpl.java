@@ -19,13 +19,12 @@ public class ClienteServiceImpl implements ClienteService{
     @Override
     @Transactional(readOnly = true)
     public ClientsModel listarCliente(int id) {
-       return (ClientsModel) clientRepository.findAll();
-    }
+       return clientRepository.findById(id).orElse(null);
+       }
 
     @Override
     public List<ClientsModel> listarClientes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listarClientes'");
+        return (List<ClientsModel>) clientRepository.findAll();
     }
 
     @Override

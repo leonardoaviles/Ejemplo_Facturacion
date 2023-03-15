@@ -38,6 +38,10 @@ public class FacturaModel implements Serializable{
     @JoinColumn(name = "pkProducto")
     private List<ProductsModel> productsModel;
 
+    public FacturaModel(){
+        
+    }
+
     public FacturaModel(int pkFactura, String dateFactura, ClientsModel clientsModel, ProductsModel productsModel) {
         this.pkFactura = pkFactura;
         this.dateFactura = dateFactura;

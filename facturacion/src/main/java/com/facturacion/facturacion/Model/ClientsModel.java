@@ -30,20 +30,24 @@ public class ClientsModel implements Serializable{
     @Column(name = "nombre")
     private String name;
     @NonNull
-    @Column(name = "lastName")
+    @Column(name = "apellido")
     private String lastName;
     @NonNull
-    @Column(name = "adress")
+    @Column(name = "direccion")
     private String adress;
     @NonNull
-    @Column(name = "phone")
+    @Column(name = "telefono")
     private String phone;
     @NonNull
-    @Column(name = "email")
+    @Column(name = "correo")
     private String email;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "clientsModel" , cascade = CascadeType.ALL)
     private List <FacturaModel> facturas;
+
+    public ClientsModel(){
+        this.facturas = new ArrayList<FacturaModel>();
+    }
 
     public ClientsModel(int pkclient, String name, String lastName, String adress, String phone, String email) {
         this.pkClient = pkclient;
