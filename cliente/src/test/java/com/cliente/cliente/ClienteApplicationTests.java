@@ -1,10 +1,10 @@
-package com.facturacion.facturacion;
+package com.cliente.cliente;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FacturacionApplicationTests {
+class ClienteApplicationTests {
 
 	@Test
 	void contextLoads() {

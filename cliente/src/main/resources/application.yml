@@ -1,5 +1,5 @@
 spring:
   application:
-    nameL: Clientes
+    name: servicios-producto
 server:
   port: 8080
