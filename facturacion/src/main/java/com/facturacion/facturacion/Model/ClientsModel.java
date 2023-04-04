@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -42,6 +44,7 @@ public class ClientsModel implements Serializable{
     @Column(name = "correo")
     private String email;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "clientsModel" , cascade = CascadeType.ALL)
     private List <FacturaModel> facturas;
 

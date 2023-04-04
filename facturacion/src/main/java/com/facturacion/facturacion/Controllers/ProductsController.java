@@ -1,5 +1,8 @@
 package com.facturacion.facturacion.Controllers;
 
+import com.facturacion.facturacion.Service.ProductsService;
+import com.facturacion.facturacion.Model.ProductsModel;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,39 +14,34 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.facturacion.facturacion.Model.ClientsModel;
-import com.facturacion.facturacion.Service.ClienteService;
-
 @RestController
-@RequestMapping("/Clientes")
-public class ClientsController {
+@RequestMapping("/Productos")
+public class ProductsController {
     
     @Autowired
-    ClienteService clienteService;
+    ProductsService productsService;
 
     @GetMapping("/all")
-    public @ResponseBody List<ClientsModel> listarClientes(){
-        return clienteService.listarClientes();
+    public @ResponseBody List<ProductsModel> listarClientes(){
+        return productsService.listarProductos();
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ClientsModel listarClientePorID(@PathVariable int id){
+    public @ResponseBody ProductsModel listarClientePorID(@PathVariable int id){
 
-        return clienteService.listarCliente(id);
+        return productsService.listarProducto(id);
     }
 
     @DeleteMapping("delete/{id}")
     public void EliminarClientePorID(@PathVariable int id){
 
-        clienteService.eliminarCliente(id);
+        productsService.eliminarProducto(id);
     }
 
     @PostMapping("/save")
-    public void GuardarClientePorID(ClientsModel clientsModel){
+    public void GuardarClientePorID(ProductsModel ProductsModel){
 
-        clienteService.guardarCliente(clientsModel);
+        productsService.guardarProducto(ProductsModel);
     }
-
-
 
 }

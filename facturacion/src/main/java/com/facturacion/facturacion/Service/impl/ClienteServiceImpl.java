@@ -19,7 +19,7 @@ public class ClienteServiceImpl implements ClienteService{
     @Override
     @Transactional(readOnly = true)
     public ClientsModel listarCliente(int id) {
-       return clientRepository.findById(id).orElse(null);
+       return clientRepository.findById(id).get();
        }
 
     @Override
