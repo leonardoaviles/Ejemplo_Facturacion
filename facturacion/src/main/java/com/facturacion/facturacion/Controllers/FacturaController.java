@@ -3,6 +3,7 @@ package com.facturacion.facturacion.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,39 +12,38 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.facturacion.facturacion.Model.ClientsModel;
-import com.facturacion.facturacion.Service.ClienteService;
+import com.facturacion.facturacion.Service.FacturaService;
+import com.facturacion.facturacion.Model.FacturaModel;
 
 @RestController
-@RequestMapping("/Clientes")
-public class ClientsController {
+@RequestMapping("/facturas")
+public class FacturaController {
     
     @Autowired
-    ClienteService clienteService;
+    FacturaService facturaService;
 
     @GetMapping("/all")
-    public @ResponseBody List<ClientsModel> listarClientes(){
-        return clienteService.listarClientes();
+    public @ResponseBody List<FacturaModel> listarClientes(){
+        return facturaService.listarFacturas();
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody ClientsModel listarClientePorID(@PathVariable int id){
+    public @ResponseBody FacturaModel listarClientePorID(@PathVariable long id){
 
-        return clienteService.listarCliente(id);
+        return facturaService.listarFactura(id);
     }
 
     @DeleteMapping("delete/{id}")
-    public void EliminarClientePorID(@PathVariable int id){
+    public void EliminarClientePorID(@PathVariable long id){
 
-        clienteService.eliminarCliente(id);
+        facturaService.eliminarFactura(id);
     }
 
     @PostMapping("/save")
-    public void GuardarClientePorID(ClientsModel clientsModel){
+    public void GuardarClientePorID(FacturaModel FacturaModel){
 
-        clienteService.guardarCliente(clientsModel);
+        facturaService.guardarFactura(FacturaModel);
     }
-
 
 
 }
