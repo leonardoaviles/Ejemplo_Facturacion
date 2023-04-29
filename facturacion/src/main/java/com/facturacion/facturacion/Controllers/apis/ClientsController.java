@@ -37,7 +37,7 @@ public class ClientsController {
     @GetMapping("/all")
     public @ResponseBody List<ClientsModel> listarClientes(){
         return clienteService.listarClientes();
-    }
+    } 
 
     @GetMapping("/{id}")
     public @ResponseBody ClientsModel listarClientePorID(@PathVariable @Valid int id){

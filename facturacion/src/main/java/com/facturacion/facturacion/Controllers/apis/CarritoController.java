@@ -63,7 +63,7 @@ public class CarritoController {
 
     }
 
-    @GetMapping("CPM/all")
+    @GetMapping("CPM/all") 
     public @ResponseBody List<CarritoProductoModel> listarCarritos2() {
 
         return (List<CarritoProductoModel>) carritoProductoRepository.findAll();

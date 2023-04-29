@@ -39,7 +39,7 @@ public class ProductsController {
     @GetMapping("/all")
     public @ResponseBody List<ProductsModel> listarProductos(){
         return productsService.listarProductos();
-    }
+    }  
 
     @ExceptionHandler(NotFoundException.class)
     @GetMapping("/{id}")

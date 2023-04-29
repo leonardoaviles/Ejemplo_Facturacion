@@ -26,7 +26,7 @@ public class DetalleFacturaController {
     @GetMapping("/all")
     public @ResponseBody List<DetalleFacturaModel> listarDetallesFacturas(){
         return detalleFacturaService.listarDetalleFacturas();
-    }
+    } 
 
     @GetMapping("/{id}")
     public @ResponseBody DetalleFacturaModel listarDetalleFacturaPorID(@PathVariable  @Valid long id){
