@@ -9,3 +9,4 @@ public interface DetalleFacturaService {
     public List<DetalleFacturaModel> listarDetalleFacturas();
     
 }
+

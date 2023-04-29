@@ -19,62 +19,42 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "carrito")
+@Data
 public class CarritoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="pk_carrito")
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "fk_cliente")
     ClientsModel clientsModel;
 
-    @Column(name="estatus")
-    private boolean status;
-
     @OneToMany(mappedBy = "carritoModel", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<CarritoProductoModel> carritoProductoModel;
 
+    @OneToOne(mappedBy = "carritoModel")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+    private FacturaModel facturaModel;
+
+    @Column(name="estatus")
+    private boolean status;
+
     public CarritoModel(){
         this.carritoProductoModel = new ArrayList<CarritoProductoModel>();
-
+        this.facturaModel = new FacturaModel();
     }
 
-    public CarritoModel(Long Id, ClientsModel clientsModel, boolean status) {
+    public CarritoModel(Long id, ClientsModel clientsModel, boolean status) {
         this.id = id;
         this.clientsModel = clientsModel;
-        this.status = status;
-    }
-
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public ClientsModel getClientsModel() {
-        return clientsModel;
-    }
-
-
-    public void setClientsModel(ClientsModel clientsModel) {
-        this.clientsModel = clientsModel;
-    }   
-    
-    public boolean getStatus(){
-        return status;
-    }
-
-    public void setStatus(boolean status){
         this.status = status;
     }
 

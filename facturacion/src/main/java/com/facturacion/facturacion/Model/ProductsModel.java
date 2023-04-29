@@ -16,8 +16,11 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.Data;
+
 @Entity
 @Table(name ="products")
+@Data
 public class ProductsModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -34,9 +37,14 @@ public class ProductsModel implements Serializable{
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productsModel" , cascade = CascadeType.ALL)
     private List<CarritoProductoModel> carritoProductoModel;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "productsModel")
+    private List<DetalleFacturaModel> detallesFacturaModel;
     
     public ProductsModel(){
         this.carritoProductoModel = new ArrayList<CarritoProductoModel>();
+        this.detallesFacturaModel = new ArrayList<DetalleFacturaModel>();
         
     }
 
@@ -47,36 +55,5 @@ public class ProductsModel implements Serializable{
         this.stock = stock;
         this.precio = precio;
     }
-    public int getPkProducto() {
-        return pkProducto;
-    }
-    public void setPkProducto(int pkProducto) {
-        this.pkProducto = pkProducto;
-    }
-    public String getNombre() {
-        return nombre;
-    }
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getCodigo() {
-        return codigo;
-    }
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
-    public int getStock() {
-        return stock;
-    }
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
-    public double getPrecio() {
-        return precio;
-    }
-    public void setPrecio(double precio) {
-        this.precio = precio;
-    }
-    
+     
 }

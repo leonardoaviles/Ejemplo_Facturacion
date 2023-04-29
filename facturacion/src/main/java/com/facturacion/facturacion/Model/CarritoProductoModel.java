@@ -1,23 +1,19 @@
 package com.facturacion.facturacion.Model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 
 @Entity
 @Table(name = "carrito_producto")
+@Data
 public class CarritoProductoModel {
 
     @Id
@@ -46,37 +42,4 @@ public class CarritoProductoModel {
         this.productsModel = productsModel;
         this.cantidad = cantidad;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public CarritoModel getCarritoModel() {
-        return carritoModel;
-    }
-
-    public void setCarritoModel(CarritoModel carritoModel) {
-        this.carritoModel = carritoModel;
-    }
-
-    public ProductsModel getProductoModel() {
-        return productsModel;
-    }
-
-    public void setProductoModel(ProductsModel productsModel) {
-        this.productsModel = productsModel;
-    }
-
-    public Integer getCantidad() {
-        return cantidad;
-    }
-
-    public void setCantidad(Integer cantidad) {
-        this.cantidad = cantidad;
-    }
-
 }

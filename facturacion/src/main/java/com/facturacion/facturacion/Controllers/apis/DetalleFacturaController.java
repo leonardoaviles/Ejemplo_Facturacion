@@ -15,6 +15,7 @@ import com.facturacion.facturacion.Service.DetalleFacturaService;
 import com.facturacion.facturacion.Model.DetalleFacturaModel;
 
 
+
 @RestController
 @RequestMapping("api/detalleFactura")
 public class DetalleFacturaController {

@@ -15,6 +15,7 @@ import com.facturacion.facturacion.Service.DetalleFacturaService;
 @Service
 public class DetalleFacturaServiceImpl implements DetalleFacturaService {
 
+    
     @Autowired
     DetalleFacturaRepository detalleFacturaRepository;
 

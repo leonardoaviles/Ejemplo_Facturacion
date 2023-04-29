@@ -13,6 +13,7 @@ import com.facturacion.facturacion.Service.ClienteService;
 @Service
 public class ClienteServiceImpl implements ClienteService{
 
+    
     @Autowired
     private ClientRepository clientRepository;
 

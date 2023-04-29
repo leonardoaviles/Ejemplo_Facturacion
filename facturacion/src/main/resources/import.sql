@@ -22,12 +22,13 @@ insert into products (nombre,codigo,stock,precio) values ('Harina','123456789',1
 --tabla facturacion
 
 insert into carrito (fk_cliente,estatus) values (1, true)
+insert into carrito (fk_cliente,estatus) values (1, false)
 
 insert into carrito_producto (fk_carrito, fk_producto, cantidad) values (1,1,5)
 
-insert into factura (fk_cliente) values (1);
+insert into factura (fk_cliente,fk_carrito,date_factura) values (1,1,'05/04/2023');
 
-insert into detalle_factura (date_Factura,fk_factura,precio_venta,total) values ('12/04/2023',1,50,150)
+insert into detalle_factura (fk_factura,fk_producto,cantidad,precio_venta,total) values (1,1,15,50,150)
 
 
 

@@ -9,18 +9,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.lang.NonNull;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
 
 @Entity
 @Table(name = "factura")
+@Data
 public class FacturaModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -30,35 +29,31 @@ public class FacturaModel implements Serializable{
     @Column(name = "pk_factura")
     private long pkFactura;
 
-    @NonNull
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_cliente")
     private ClientsModel clientsModel;
+
+    @OneToOne
+    @JoinColumn(name = "fk_carrito")
+    private CarritoModel carritoModel;
+
+    @Column(name = "date_factura")
+    private String dateFactura;
 
     @OneToOne(mappedBy = "facturaModel")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     private DetalleFacturaModel detalleFacturaModel;
 
     public FacturaModel(){
+        this.detalleFacturaModel = new DetalleFacturaModel();
         
     }
 
-    public FacturaModel(long pkFactura, ClientsModel clientsModel) {
+    public FacturaModel(long pkFactura, ClientsModel clientsModel, CarritoModel carritoModel, String dateFactura) {
         this.pkFactura = pkFactura;
         this.clientsModel = clientsModel;
-    }
-    public long getPkFactura() {
-        return pkFactura;
-    }
-    public void setPkFactura(long pkFactura) {
-        this.pkFactura = pkFactura;
-    }
-
-    public ClientsModel getClientsModel() {
-        return clientsModel;
-    }
-    public void setClientsModel(ClientsModel clientsModel) {
-        this.clientsModel = clientsModel;
+        this.carritoModel = carritoModel;
+        this.dateFactura = dateFactura;
     }
 }

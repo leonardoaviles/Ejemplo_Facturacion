@@ -9,6 +9,7 @@ public class ExceptionController {
     public ExceptionController(){
 
     }
+    
 
     public ExceptionController(String code, String messageError) {
         this.code = code;

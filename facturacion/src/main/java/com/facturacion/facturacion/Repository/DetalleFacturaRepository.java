@@ -7,3 +7,4 @@ import com.facturacion.facturacion.Model.DetalleFacturaModel;
 public interface DetalleFacturaRepository extends CrudRepository<DetalleFacturaModel,Long>{
     
 }
+

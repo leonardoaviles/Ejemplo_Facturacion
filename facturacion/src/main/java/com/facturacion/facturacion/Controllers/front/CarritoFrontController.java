@@ -51,7 +51,7 @@ public class CarritoFrontController {
 
         Optional<CarritoModel> optional = carritoRepository.findByClientsModel(clientsModel);
 
-        if (!optional.isPresent() || optional.get().getStatus() == false) {
+       /* if (!optional.isPresent() || optional.get().get() == false) {
 
             CarritoModel carritoModel = new CarritoModel();
             carritoModel.setStatus(true);
@@ -59,7 +59,7 @@ public class CarritoFrontController {
             
 
             carritoService.guardarCarrito(carritoModel);
-        }
+        } */
         ClientsModel cliente = clienteService.listarCliente(id);
         model.addAttribute("clientes", cliente);
 

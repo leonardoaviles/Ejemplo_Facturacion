@@ -9,3 +9,4 @@ import com.facturacion.facturacion.Model.CarritoProductoModel;
 public interface CarritoProductoRepository extends CrudRepository<CarritoProductoModel, Integer>{
     
 }
+
