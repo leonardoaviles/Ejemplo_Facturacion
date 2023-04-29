@@ -54,11 +54,11 @@ public class CarritoController {
     }
 
     @GetMapping("/cliente/{id}")
-    public @ResponseBody Optional<CarritoModel> listarCarritoPorCliente(@PathVariable @Valid int id){
+    public @ResponseBody List<CarritoModel> listarCarritoPorCliente(@PathVariable @Valid int id){
 
         ClientsModel clientsModel = clientRepository.findById(id).get();
 
-        return carritoRepository.findByClientsModel(clientsModel);
+        return  carritoRepository.findByClientsModel(clientsModel).get();
 
     }
 
@@ -84,11 +84,20 @@ public class CarritoController {
         
         ClientsModel clientsModel = clientRepository.findById(id).get();
 
-        CarritoModel carritoModel = carritoRepository.findByClientsModel(clientsModel).get();
+        List<CarritoModel> carritoModel = carritoRepository.findByClientsModel(clientsModel).get();
+        CarritoModel carritoModel2 = new CarritoModel();
 
-        if(carritoModel.getStatus() == true)
+        for(CarritoModel carrito : carritoModel){
+
+            if(carrito.getStatus()==true){
+                carritoModel2 = carrito;
+                break;
+            }
+    }
+
+        if(carritoModel2.getStatus() == true)
         {
-            carritoModel.getCarritoProductoModel().addAll(carritoProductoModel);
+            carritoModel2.getCarritoProductoModel().addAll(carritoProductoModel);
             return ResponseEntity.status(HttpStatus.CREATED).body("Carrito updated");
             
         }

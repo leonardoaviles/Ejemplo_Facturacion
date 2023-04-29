@@ -21,7 +21,7 @@ public class CarritoServiceImpl implements CarritoService {
         try {
             carritoRepository.save(carritoModel);
         } catch (Exception e) {
-            throw new RuntimeException("Error al guardar Carrito");
+            throw new RuntimeException(e.getMessage()+"Error al guardar Carrito");
 
         }
 

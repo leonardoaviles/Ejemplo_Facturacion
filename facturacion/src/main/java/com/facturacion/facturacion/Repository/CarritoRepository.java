@@ -1,5 +1,6 @@
 package com.facturacion.facturacion.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
@@ -11,7 +12,7 @@ import com.facturacion.facturacion.Model.ClientsModel;
 @Repository
 public interface CarritoRepository extends CrudRepository<CarritoModel,Integer>{
 
-    public abstract Optional<CarritoModel> findByClientsModel(ClientsModel clientsModel);
+    public abstract Optional<List<CarritoModel>> findByClientsModel(ClientsModel clientsModel);
     
 }
 

@@ -1,5 +1,6 @@
 package com.facturacion.facturacion.Controllers.front;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,7 @@ public class CarritoFrontController {
 
         ClientsModel clientsModel = clientRepository.findById(id).get();
 
-        Optional<CarritoModel> optional = carritoRepository.findByClientsModel(clientsModel);
+        Optional<List<CarritoModel>> optional = carritoRepository.findByClientsModel(clientsModel);
 
         ClientsModel cliente = clienteService.listarCliente(id);
         model.addAttribute("clientes", cliente);

@@ -2,6 +2,7 @@ package com.facturacion.facturacion.Model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +44,7 @@ public class FacturaModel implements Serializable{
     @Column(name = "date_factura")
     private String dateFactura;
 
-    @OneToOne(mappedBy = "facturaModel")
+    @OneToOne(mappedBy = "facturaModel", cascade = CascadeType.ALL)
     @JsonIgnore
     private DetalleFacturaModel detalleFacturaModel;
 

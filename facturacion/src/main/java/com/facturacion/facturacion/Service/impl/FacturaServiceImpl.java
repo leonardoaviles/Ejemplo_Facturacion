@@ -55,13 +55,12 @@ public class FacturaServiceImpl implements FacturaService {
             throw new RuntimeException("Error al listar Factura");
 
         }
-        
+
     }
 
     @Override
     public List<FacturaModel> listarFacturas() {
 
-        
         try {
             return (List<FacturaModel>) facturaRepository.findAll();
         } catch (Exception e) {
@@ -94,9 +93,20 @@ public class FacturaServiceImpl implements FacturaService {
 
             detalleFacturaModel.setFacturaModel(facturaModel);
 
-            CarritoModel carritoModel = carritoRepository.findByClientsModel(facturaModel.getClientsModel()).get();
+            List<CarritoModel> carritoModel = carritoRepository.findByClientsModel(facturaModel.getClientsModel())
+                    .get();
+            CarritoModel carritoModel2 = new CarritoModel();
 
-            List<CarritoProductoModel> carritoProductoModel = carritoModel.getCarritoProductoModel();
+
+            for (CarritoModel carrito : carritoModel) {
+
+                if (carrito.getStatus() == true) {
+                    carritoModel2 = carrito;
+                    break;
+                }
+            }
+
+            List<CarritoProductoModel> carritoProductoModel = carritoModel2.getCarritoProductoModel();
 
             for (CarritoProductoModel carrito : carritoProductoModel) {
                 int cantidad = carrito.getCantidad();
@@ -125,9 +135,9 @@ public class FacturaServiceImpl implements FacturaService {
 
                 }
             }
-            carritoModel.setStatus(false);
+            carritoModel2.setStatus(false);
 
-            carritoRepository.save(carritoModel);
+            carritoRepository.save(carritoModel2);
 
         } catch (Exception e) {
             throw new RuntimeException("Error al guardar factura");
