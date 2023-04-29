@@ -39,6 +39,15 @@ public class FacturaController {
 
     @GetMapping("/all")
     public @ResponseBody List<FacturaModel> listarFacturas(){
+        
+        List<FacturaModel> facturaModel = facturaService.listarFacturas();
+
+        for(int i= 0; i< facturaModel.size(); i++){
+
+            if(facturaModel.get(i).getClientsModel() == null)
+                facturaModel.remove(i);
+        }
+
         return facturaService.listarFacturas();
     }
 
