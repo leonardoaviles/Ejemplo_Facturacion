@@ -154,7 +154,7 @@
 					"response": []
 				},
 				{
-					"name": "Agregar productos al carrito",
+					"name": "Agregar productos al carrito por cliente",
 					"request": {
 						"method": "GET",
 						"header": []
