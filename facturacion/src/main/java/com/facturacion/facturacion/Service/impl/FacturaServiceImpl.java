@@ -6,8 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.facturacion.facturacion.Model.CarritoModel;
+import com.facturacion.facturacion.Model.CarritoProductoModel;
+import com.facturacion.facturacion.Model.ClientsModel;
+import com.facturacion.facturacion.Model.DetalleFacturaModel;
 import com.facturacion.facturacion.Model.FacturaModel;
+import com.facturacion.facturacion.Model.ProductsModel;
+import com.facturacion.facturacion.Repository.CarritoRepository;
+import com.facturacion.facturacion.Repository.ClientRepository;
+import com.facturacion.facturacion.Repository.DetalleFacturaRepository;
 import com.facturacion.facturacion.Repository.FacturaRepository;
+import com.facturacion.facturacion.Repository.ProductsRepository;
 import com.facturacion.facturacion.Service.FacturaService;
 
 import org.apache.http.HttpResponse;
@@ -26,29 +35,103 @@ public class FacturaServiceImpl implements FacturaService {
     @Autowired
     FacturaRepository facturaRepository;
 
+    @Autowired
+    ClientRepository clienteRepository;
+
+    @Autowired
+    CarritoRepository carritoRepository;
+
+    @Autowired
+    DetalleFacturaRepository detalleFacturaRepository;
+
+    @Autowired
+    ProductsRepository productsRepository;
+
     @Override
     public FacturaModel listarFactura(long id) {
-        return facturaRepository.findById(id).get();
+        try {
+            return facturaRepository.findById(id).get();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al listar Factura");
+
+        }
+        
     }
 
     @Override
     public List<FacturaModel> listarFacturas() {
 
-        return (List<FacturaModel>) facturaRepository.findAll();
+        
+        try {
+            return (List<FacturaModel>) facturaRepository.findAll();
+        } catch (Exception e) {
+            throw new RuntimeException("Error al listar Facturas");
+
+        }
     }
 
     @Override
     public void eliminarFactura(long id) {
 
-        facturaRepository.deleteById(id);
+        if (facturaRepository.existsById(id)) {
+            try {
+                facturaRepository.deleteById(id);
+            } catch (Exception e) {
+                throw new RuntimeException("Error al eliminar Factura");
+
+            }
+        } else
+            throw new RuntimeException("Error al eliminar Factura, no existe");
     }
 
     @Override
     public void guardarFactura(FacturaModel facturaModel) {
 
-        
+        try {
+            facturaModel.setDateFactura(fecha());
 
-        facturaRepository.save(facturaModel);
+            DetalleFacturaModel detalleFacturaModel = new DetalleFacturaModel();
+
+            detalleFacturaModel.setFacturaModel(facturaModel);
+
+            CarritoModel carritoModel = carritoRepository.findByClientsModel(facturaModel.getClientsModel()).get();
+
+            List<CarritoProductoModel> carritoProductoModel = carritoModel.getCarritoProductoModel();
+
+            for (CarritoProductoModel carrito : carritoProductoModel) {
+                int cantidad = carrito.getCantidad();
+                double precio = carrito.getProductsModel().getPrecio();
+                double total = cantidad * precio;
+                ProductsModel productsModel = new ProductsModel();
+
+                productsModel = productsRepository.findByCodigo(carrito.getProductsModel().getCodigo()).get();
+
+                if (cantidad <= productsModel.getStock()) {
+                    detalleFacturaModel.setProductsModel(carrito.getProductsModel());
+                    detalleFacturaModel.setCantidad(carrito.getCantidad());
+                    detalleFacturaModel.setPrecioVenta(carrito.getProductsModel().getPrecio());
+
+                    detalleFacturaModel.setTotal(total);
+
+                    facturaRepository.save(facturaModel);
+
+                    detalleFacturaRepository.save(detalleFacturaModel);
+
+                    int stock = productsModel.getStock();
+
+                    productsModel.setStock(stock - cantidad);
+
+                    productsRepository.save(productsModel);
+
+                }
+            }
+            carritoModel.setStatus(false);
+
+            carritoRepository.save(carritoModel);
+
+        } catch (Exception e) {
+            throw new RuntimeException("Error al guardar factura");
+        }
 
     }
 

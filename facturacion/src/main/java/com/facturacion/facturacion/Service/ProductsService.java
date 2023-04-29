@@ -9,7 +9,7 @@ public interface ProductsService {
     public ProductsModel listarProducto(int id);
     public List<ProductsModel> listarProductos();
     public void eliminarProducto(int id);
-    public void guardarProducto(ProductsModel clientsModel);
+    public boolean guardarProducto(ProductsModel clientsModel);
     
 }
 

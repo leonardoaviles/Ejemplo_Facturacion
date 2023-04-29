@@ -50,10 +50,9 @@ public class FacturaModel implements Serializable{
         
     }
 
-    public FacturaModel(long pkFactura, ClientsModel clientsModel, CarritoModel carritoModel, String dateFactura) {
+    public FacturaModel(long pkFactura, ClientsModel clientsModel, CarritoModel carritoModel) {
         this.pkFactura = pkFactura;
         this.clientsModel = clientsModel;
         this.carritoModel = carritoModel;
-        this.dateFactura = dateFactura;
     }
 }

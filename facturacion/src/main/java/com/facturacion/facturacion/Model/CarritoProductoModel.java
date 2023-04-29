@@ -30,7 +30,7 @@ public class CarritoProductoModel {
     private ProductsModel productsModel;
     
     @Column(name = "cantidad")
-    private Integer cantidad;
+    private int cantidad;
 
     public CarritoProductoModel() {
 

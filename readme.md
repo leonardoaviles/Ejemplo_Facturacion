@@ -10,9 +10,7 @@
 
 ## En progreso
 
-### Ante el cambio del precio de un producto las facturas ya generadas no deben sufrir modificaciones
-### obtener fecha actuala a la hora de crear un comprobante
-### calcular el precio total de la venta
+
 
 ### YA QUEDO
 ### Agregar Validaciones - falta en el controller en el service ya quedo
@@ -20,3 +18,6 @@
 ### validaciones cliente existente, productos existentes - ya quedo
 ## CREAR CONTROOLLER PARA CARRITO Y CARRITO PRODUCTO
 ## MANDAR EL ID DEL CLIENTE Y PRODUCTO PARA EL CARRITO
+### Ante el cambio del precio de un producto las facturas ya generadas no deben sufrir modificaciones
+### obtener fecha actuala a la hora de crear un comprobante
+### calcular el precio total de la venta

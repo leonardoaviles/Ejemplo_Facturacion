@@ -15,8 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.facturacion.facturacion.Service.ClienteService;
 import com.facturacion.facturacion.Service.FacturaService;
+import com.facturacion.facturacion.Model.CarritoModel;
+import com.facturacion.facturacion.Model.ClientsModel;
 import com.facturacion.facturacion.Model.FacturaModel;
+import com.facturacion.facturacion.Repository.CarritoRepository;
+import com.facturacion.facturacion.Repository.ClientRepository;
 
 @RestController
 @RequestMapping("api/facturas")
@@ -43,11 +48,9 @@ public class FacturaController {
     }
 
     @PostMapping("/save")
-    public void GuardarFacturaPorID(@RequestBody @Valid FacturaModel FacturaModel){
+    public void GuardarFacturaPorID(@RequestBody @Valid FacturaModel facturaModel){
 
-        
-
-        facturaService.guardarFactura(FacturaModel);
+        facturaService.guardarFactura(facturaModel);
     }
 
 

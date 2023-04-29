@@ -39,7 +39,7 @@ public class CarritoFrontController {
     public String guardarCarrito(@ModelAttribute("carrito") CarritoModel carritoModel,
             @ModelAttribute("carritoProducto") CarritoProductoModel carritoProductoModel) {
 
-        carritoService.guardarCarrito(carritoModel, carritoProductoModel);
+        carritoService.guardarCarrito(carritoModel);
 
         return "cliente";
     }
@@ -51,15 +51,6 @@ public class CarritoFrontController {
 
         Optional<CarritoModel> optional = carritoRepository.findByClientsModel(clientsModel);
 
-       /* if (!optional.isPresent() || optional.get().get() == false) {
-
-            CarritoModel carritoModel = new CarritoModel();
-            carritoModel.setStatus(true);
-            carritoModel.setClientsModel(clientsModel);
-            
-
-            carritoService.guardarCarrito(carritoModel);
-        } */
         ClientsModel cliente = clienteService.listarCliente(id);
         model.addAttribute("clientes", cliente);
 
