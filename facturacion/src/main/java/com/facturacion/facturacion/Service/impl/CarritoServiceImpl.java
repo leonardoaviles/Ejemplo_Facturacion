@@ -36,9 +36,9 @@ public class CarritoServiceImpl implements CarritoService{
 
     }   
     @Override
-    public void guardarCarrito(CarritoModel carritoModel) {
+    public boolean guardarCarrito(CarritoModel carritoModel) {
 
-        carritoRepository.save(carritoModel);
+        return carritoRepository.save(carritoModel).getStatus();
 
     }
     @Override

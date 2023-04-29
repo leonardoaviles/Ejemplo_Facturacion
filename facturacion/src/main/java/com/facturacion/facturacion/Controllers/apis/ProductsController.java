@@ -37,31 +37,31 @@ public class ProductsController {
 
     @ExceptionHandler(NotFoundException.class)
     @GetMapping("/all")
-    public @ResponseBody List<ProductsModel> listarClientes(){
+    public @ResponseBody List<ProductsModel> listarProductos(){
         return productsService.listarProductos();
     }
 
     @ExceptionHandler(NotFoundException.class)
     @GetMapping("/{id}")
-    public @ResponseBody ProductsModel listarClientePorID(@PathVariable @Valid int id){
+    public @ResponseBody ProductsModel listarProductoPorID(@PathVariable @Valid int id){
 
         return productsService.listarProducto(id);
     }
 
     @ExceptionHandler(NotFoundException.class)
     @DeleteMapping("delete/{id}")
-    public @ResponseBody void EliminarClientePorID(@PathVariable @Valid int id){
+    public @ResponseBody void EliminarProductoPorID(@PathVariable @Valid int id){
 
         productsService.eliminarProducto(id);
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     @PostMapping("/save")
-    public @ResponseBody ResponseEntity<?> GuardarClientePorID(@RequestBody @Valid ProductsModel productsModel){
+    public @ResponseBody ResponseEntity<?> GuardarProductoPorID(@RequestBody @Valid ProductsModel productsModel){
 
-        Optional<ProductsModel> clienteExistente = productsRepository.findByCodigo(productsModel.getCodigo());
+        Optional<ProductsModel> ProductoExistente = productsRepository.findByCodigo(productsModel.getCodigo());
 
-        if(clienteExistente.isPresent())
+        if(ProductoExistente.isPresent())
             return ResponseEntity.status(HttpStatus.CONFLICT).body("This product exist");
         else{
             productsService.guardarProducto(productsModel);
@@ -69,10 +69,20 @@ public class ProductsController {
         }
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
     @PostMapping("/update")
-    public void actualizarClientePorID(@RequestBody @Valid ProductsModel productsModel){
+    public @ResponseBody ResponseEntity<?> actualizarProductoPorCodigo(@RequestBody @Valid ProductsModel productsModel){
+        
+        Optional<ProductsModel> ProductoExistente = productsRepository.findByCodigo(productsModel.getCodigo());
 
+        if(ProductoExistente.isPresent())
+        {
             productsService.guardarProducto(productsModel);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("This product exist");
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Thos producto does not exist");
+        }
 
     }
 }

@@ -65,6 +65,22 @@ public class ClientsController {
         }
     }
 
+    @PostMapping("/update")
+    public @ResponseBody ResponseEntity<?> GuardarClientePorDni(@RequestBody @Valid ClientsModel clientsModel){
+
+        Optional<ClientsModel> clienteExistente = clientRepository.findByDni(clientsModel.getDni());
+
+        if(clienteExistente.isPresent())
+        {
+            clienteService.guardarCliente(clientsModel);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("This client exist");
+        }
+        else
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This client don't exist");
+    }
+
+
+
 
 
 }

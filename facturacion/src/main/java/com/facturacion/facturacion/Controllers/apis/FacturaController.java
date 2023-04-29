@@ -26,24 +26,24 @@ public class FacturaController {
     FacturaService facturaService;
 
     @GetMapping("/all")
-    public @ResponseBody List<FacturaModel> listarClientes(){
+    public @ResponseBody List<FacturaModel> listarFacturas(){
         return facturaService.listarFacturas();
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody FacturaModel listarClientePorID(@PathVariable @Valid long id){
+    public @ResponseBody FacturaModel listarFacturaPorID(@PathVariable @Valid long id){
 
         return facturaService.listarFactura(id);
     }
 
     @DeleteMapping("delete/{id}")
-    public void EliminarClientePorID(@PathVariable @Valid long id){
+    public void EliminarFacturaPorID(@PathVariable @Valid long id){
 
         facturaService.eliminarFactura(id);
     }
 
     @PostMapping("/save")
-    public void GuardarClientePorID(@RequestBody @Valid FacturaModel FacturaModel){
+    public void GuardarFacturaPorID(@RequestBody @Valid FacturaModel FacturaModel){
 
         
 

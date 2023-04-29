@@ -9,6 +9,6 @@ import com.facturacion.facturacion.Model.ClientsModel;
 public interface CarritoService {
     
     public void guardarCarrito(CarritoModel carritoModel, CarritoProductoModel carritoProductoModel);
-    public void guardarCarrito(CarritoModel carritoModel);
+    public boolean guardarCarrito(CarritoModel carritoModel);
     public List<CarritoModel> listarCarritos();
 }

@@ -34,7 +34,7 @@ public class CarritoModel {
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "fk_cliente")
-    ClientsModel clientsModel;
+    private ClientsModel clientsModel;
 
     @OneToMany(mappedBy = "carritoModel", cascade = CascadeType.ALL)
     @JsonIgnore
@@ -45,7 +45,7 @@ public class CarritoModel {
     private FacturaModel facturaModel;
 
     @Column(name="estatus")
-    private boolean status;
+    private Boolean status;
 
     public CarritoModel(){
         this.carritoProductoModel = new ArrayList<CarritoProductoModel>();
