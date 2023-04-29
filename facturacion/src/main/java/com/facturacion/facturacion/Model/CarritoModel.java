@@ -29,7 +29,7 @@ public class CarritoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="pk_carrito")
-    private Long id;
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_cliente")
@@ -50,7 +50,7 @@ public class CarritoModel {
         this.facturaModel = new FacturaModel();
     }
 
-    public CarritoModel(Long id, ClientsModel clientsModel, boolean status) {
+    public CarritoModel(int id, ClientsModel clientsModel, boolean status) {
         this.id = id;
         this.clientsModel = clientsModel;
         this.status = status;

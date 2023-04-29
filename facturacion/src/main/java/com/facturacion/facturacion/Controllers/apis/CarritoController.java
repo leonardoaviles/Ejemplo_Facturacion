@@ -6,6 +6,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ClassPathScanningCandidateComponentProvider;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -54,11 +55,11 @@ public class CarritoController {
     }
 
     @GetMapping("/cliente/{id}")
-    public @ResponseBody List<CarritoModel> listarCarritoPorCliente(@PathVariable @Valid int id){
+    public @ResponseBody Optional<List<CarritoModel>> listarCarritoPorCliente(@PathVariable @Valid int id) {
 
         ClientsModel clientsModel = clientRepository.findById(id).get();
 
-        return  carritoRepository.findByClientsModel(clientsModel).get();
+        return carritoService.listarCarritosPorId(clientsModel);
 
     }
 
@@ -71,39 +72,45 @@ public class CarritoController {
     @PostMapping("/save")
     public @ResponseBody ResponseEntity<?> guardarCarrito(@RequestBody @Valid CarritoModel carritoModel) {
 
-        if(carritoService.guardarCarrito(carritoModel))
-             return ResponseEntity.status(HttpStatus.CREATED).body("Carrito created");
+        if (carritoService.guardarCarrito(carritoModel))
+            return ResponseEntity.status(HttpStatus.CREATED).body("Carrito created");
         else
-             return ResponseEntity.status(HttpStatus.CONFLICT).body("Can't create carrito");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Can't create carrito");
 
     }
 
     @ExceptionHandler(DataIntegrityViolationException.class)
     @PutMapping("/{id}")
-    public @ResponseBody ResponseEntity<?> updateCarritoPorId(@PathVariable @Valid int id, @RequestBody @Valid List<CarritoProductoModel> carritoProductoModel) {
-        
+    public @ResponseBody ResponseEntity<?> updateCarritoPorId(@PathVariable @Valid int id,
+            @RequestBody @Valid List<CarritoProductoModel> carritoProductoModel) {
+
         ClientsModel clientsModel = clientRepository.findById(id).get();
-
         List<CarritoModel> carritoModel = carritoRepository.findByClientsModel(clientsModel).get();
-        CarritoModel carritoModel2 = new CarritoModel();
 
-        for(CarritoModel carrito : carritoModel){
+        CarritoModel carrito = new CarritoModel();
 
-            if(carrito.getStatus()==true){
-                carritoModel2 = carrito;
+        for (int i = 0; i < carritoModel.size(); i++) {
+            if (carritoModel.get(i).getStatus() == true) {
+
+                carrito = carritoModel.get(i);
                 break;
+
+            } else if(carritoModel.get(i).getStatus()==false){
+                i++;
+            }else{
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("this carrito does not exist");
             }
-    }
-
-        if(carritoModel2.getStatus() == true)
-        {
-            carritoModel2.getCarritoProductoModel().addAll(carritoProductoModel);
-            return ResponseEntity.status(HttpStatus.CREATED).body("Carrito updated");
-            
         }
-        else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("This carrito does not exist");
-        }
-    }
 
+        carrito.setCarritoProductoModel(carritoProductoModel);
+        carritoRepository.save(carrito);
+
+        for (CarritoProductoModel carritos : carritoProductoModel) {
+                carritos.setCarritoModel(carrito);
+
+            carritoProductoRepository.save(carritos);
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body("this carrito exist");
+
+    }
 }
