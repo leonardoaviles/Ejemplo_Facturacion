@@ -15,12 +15,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
 @Entity
 @Table(name ="products")
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class ProductsModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -35,10 +37,12 @@ public class ProductsModel implements Serializable{
     private double precio;
 
     @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productsModel" , cascade = CascadeType.ALL)
     private List<CarritoProductoModel> carritoProductoModel;
 
     @JsonIgnore
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @OneToMany(mappedBy = "productsModel")
     private List<DetalleFacturaModel> detallesFacturaModel;
     

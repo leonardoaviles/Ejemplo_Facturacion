@@ -22,6 +22,7 @@ import com.facturacion.facturacion.Model.ClientsModel;
 import com.facturacion.facturacion.Model.FacturaModel;
 import com.facturacion.facturacion.Repository.CarritoRepository;
 import com.facturacion.facturacion.Repository.ClientRepository;
+import com.facturacion.facturacion.Repository.FacturaRepository;
 
 @RestController
 @RequestMapping("api/facturas")
@@ -30,15 +31,22 @@ public class FacturaController {
     @Autowired
     FacturaService facturaService;
 
+    @Autowired
+    ClientRepository clientRepository;
+
+    @Autowired
+    FacturaRepository facturaRepository;
+
     @GetMapping("/all")
     public @ResponseBody List<FacturaModel> listarFacturas(){
         return facturaService.listarFacturas();
     }
 
     @GetMapping("/{id}")
-    public @ResponseBody FacturaModel listarFacturaPorID(@PathVariable @Valid long id){
+    public @ResponseBody List<FacturaModel> listarFacturaPorID(@PathVariable @Valid int id){
 
-        return facturaService.listarFactura(id);
+        ClientsModel clientsModel  = clientRepository.findById(id).get();
+        return facturaRepository.findByclientsModel(clientsModel);
     }
 
     @DeleteMapping("delete/{id}")

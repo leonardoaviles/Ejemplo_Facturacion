@@ -42,7 +42,6 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void eliminarCliente(int id) {
 
-        if (clientRepository.existsById(id)) {
             try {
                 clientRepository.deleteById(id);
 
@@ -50,8 +49,6 @@ public class ClienteServiceImpl implements ClienteService {
                 throw new RuntimeException("Error al eliminar Cliente");
 
             }
-        } else
-            throw new RuntimeException("error al eliminar Cliente");
 
     }
 

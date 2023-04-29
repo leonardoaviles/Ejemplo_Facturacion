@@ -13,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -36,13 +37,14 @@ public class FacturaModel implements Serializable{
 
     @OneToOne
     @JoinColumn(name = "fk_carrito")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     private CarritoModel carritoModel;
 
     @Column(name = "date_factura")
     private String dateFactura;
 
     @OneToOne(mappedBy = "facturaModel")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+    @JsonIgnore
     private DetalleFacturaModel detalleFacturaModel;
 
     public FacturaModel(){

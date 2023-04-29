@@ -11,13 +11,13 @@ insert into clients (nombre,apellido,dni,direccion,telefono,correo) values ('Osc
 
 -- tabla productis
 
-insert into products (nombre,codigo,stock,precio) values ('Carne','123',10,150);
-insert into products (nombre,codigo,stock,precio) values ('Lata','1234',10,150);
-insert into products (nombre,codigo,stock,precio) values ('Sabritas','12345',10,150);
-insert into products (nombre,codigo,stock,precio) values ('Mayonessa','123456',10,150);
-insert into products (nombre,codigo,stock,precio) values ('Crema','1234567',10,150);
-insert into products (nombre,codigo,stock,precio) values ('Pan','12345678',10,150);
-insert into products (nombre,codigo,stock,precio) values ('Harina','123456789',10,150);
+insert into products (nombre,codigo,stock,precio) values ('Carne','123',11000,150);
+insert into products (nombre,codigo,stock,precio) values ('Lata','1234',11000,150);
+insert into products (nombre,codigo,stock,precio) values ('Sabritas','12345',11000,150);
+insert into products (nombre,codigo,stock,precio) values ('Mayonessa','123456',11000,150);
+insert into products (nombre,codigo,stock,precio) values ('Crema','1234567',11000,150);
+insert into products (nombre,codigo,stock,precio) values ('Pan','12345678',11000,150);
+insert into products (nombre,codigo,stock,precio) values ('Harina','123456789',11000,150);
 
 --tabla facturacion
 

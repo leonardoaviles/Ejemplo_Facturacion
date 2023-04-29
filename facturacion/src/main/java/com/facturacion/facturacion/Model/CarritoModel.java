@@ -32,16 +32,14 @@ public class CarritoModel {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @JoinColumn(name = "fk_cliente")
     private ClientsModel clientsModel;
 
     @OneToMany(mappedBy = "carritoModel", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<CarritoProductoModel> carritoProductoModel;
 
-    @OneToOne(mappedBy = "carritoModel")
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
+    @OneToOne(mappedBy = "carritoModel", cascade = CascadeType.ALL)
+    @JsonIgnore
     private FacturaModel facturaModel;
 
     @Column(name="estatus")
