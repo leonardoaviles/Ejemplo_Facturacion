@@ -30,9 +30,7 @@ public class FacturaModel implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_factura")
     private long pkFactura;
-    @NonNull
-    @Column(name = "date_factura")
-    private String dateFactura;
+
     @NonNull
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -50,7 +48,6 @@ public class FacturaModel implements Serializable{
 
     public FacturaModel(long pkFactura, String dateFactura, ClientsModel clientsModel, ProductsModel productsModel) {
         this.pkFactura = pkFactura;
-        this.dateFactura = dateFactura;
         this.clientsModel = clientsModel;
         this.productsModel = productsModel;
     }
@@ -60,12 +57,7 @@ public class FacturaModel implements Serializable{
     public void setPkFactura(long pkFactura) {
         this.pkFactura = pkFactura;
     }
-    public String getDateFactura() {
-        return dateFactura;
-    }
-    public void setDateFactura(String dateFactura) {
-        this.dateFactura = dateFactura;
-    }
+
     public ClientsModel getClientsModel() {
         return clientsModel;
     }
