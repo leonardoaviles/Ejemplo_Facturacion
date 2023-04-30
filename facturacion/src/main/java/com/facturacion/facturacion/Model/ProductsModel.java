@@ -26,6 +26,7 @@ public class ProductsModel implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int pkProducto;
     private String nombre;
+    private String codigo;
     private int stock;
     private int precio;
     
@@ -38,9 +39,10 @@ public class ProductsModel implements Serializable{
         
     }
 
-    public ProductsModel(int pkProducto, String nombre, int stock, int precio) {
+    public ProductsModel(int pkProducto, String nombre, String codigo, int stock, int precio) {
         this.pkProducto = pkProducto;
         this.nombre = nombre;
+        this.codigo = codigo;
         this.stock = stock;
         this.precio = precio;
     }
@@ -56,6 +58,13 @@ public class ProductsModel implements Serializable{
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+    public String getCodigo() {
+        return codigo;
+    }
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
     public int getStock() {
         return stock;
     }

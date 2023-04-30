@@ -1,22 +1,44 @@
 package com.facturacion.facturacion.Controllers.utils;
 
 
+import java.util.NoSuchElementException;
+
+import javax.lang.model.type.NoType;
+
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.facturacion.facturacion.Controllers.Ëxceptions.ExceptionController;
 
 @RestControllerAdvice
-public class ControllerAdviceException {
+public class ControllerAdviceException extends ResponseEntityExceptionHandler{
 
-    @ExceptionHandler(value = RuntimeException.class)
-	public ResponseEntity<ExceptionController> _409ExceptionHandler(final RuntimeException exception){
+    @ExceptionHandler(value = NoSuchElementException.class)
+	public ResponseEntity<ExceptionController> productNotFound(NoSuchElementException exception){
 
-		ExceptionController err = new ExceptionController("REQ-409", exception.getMessage());
+		ExceptionController err = new ExceptionController(HttpStatus.NOT_FOUND.toString(), exception.getMessage());
+		
+		return new ResponseEntity<>(err, HttpStatus.NOT_FOUND);
+	}
+
+	@ExceptionHandler(value = DataIntegrityViolationException.class)
+	public ResponseEntity<ExceptionController> duplicateElement(DataIntegrityViolationException exception){
+
+		ExceptionController err = new ExceptionController(HttpStatus.CONFLICT.toString(), exception.getMessage());
 		
 		return new ResponseEntity<>(err, HttpStatus.CONFLICT);
 	}
    
+
+	@ExceptionHandler(value = RuntimeException.class)
+	public ResponseEntity<ExceptionController> finalError(final RuntimeException exception){
+
+		ExceptionController err = new ExceptionController(HttpStatus.BAD_REQUEST.toString(), exception.getMessage());
+		
+		return new ResponseEntity<>(err, HttpStatus.BAD_REQUEST);
+	}
 }

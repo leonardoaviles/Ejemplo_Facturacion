@@ -35,6 +35,9 @@ public class ClientsModel implements Serializable{
     @Column(name = "apellido")
     private String lastName;
     @NonNull
+    @Column(name = "dni")
+    private String dni;
+    @NonNull
     @Column(name = "direccion")
     private String adress;
     @NonNull
@@ -52,10 +55,11 @@ public class ClientsModel implements Serializable{
         this.facturas = new ArrayList<FacturaModel>();
     }
 
-    public ClientsModel(int pkclient, String name, String lastName, String adress, String phone, String email) {
+    public ClientsModel(int pkclient, String name, String lastName, String dni,String adress, String phone, String email) {
         this.pkClient = pkclient;
         this.name = name;
         this.lastName = lastName;
+        this.dni =dni;
         this.adress = adress;
         this.phone = phone;
         this.email = email;
@@ -80,6 +84,14 @@ public class ClientsModel implements Serializable{
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public String getDni() {
+        return dni;
+    }
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
     public String getAdress() {
         return adress;
     }

@@ -29,14 +29,15 @@ public class ClienteServiceImpl implements ClienteService{
 
     @Override
     public void eliminarCliente(int id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'eliminarCliente'");
+
+        clientRepository.deleteById(id);
+       
     }
 
     @Override
     public void guardarCliente(ClientsModel clientsModel) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'guardarCliente'");
+        
+        clientRepository.save(clientsModel);
     }
     
 }
