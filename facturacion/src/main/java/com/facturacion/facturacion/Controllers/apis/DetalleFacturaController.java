@@ -1,4 +1,4 @@
-package com.facturacion.facturacion.Controllers;
+package com.facturacion.facturacion.Controllers.apis;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ import com.facturacion.facturacion.Model.DetalleFacturaModel;
 
 
 @RestController
-@RequestMapping("/detalleFactura")
+@RequestMapping("api/detalleFactura")
 public class DetalleFacturaController {
 
     @Autowired

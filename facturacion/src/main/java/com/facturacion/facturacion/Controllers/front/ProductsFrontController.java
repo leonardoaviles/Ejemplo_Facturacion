@@ -1,4 +1,4 @@
-package com.facturacion.facturacion.Controllers;
+package com.facturacion.facturacion.Controllers.front;
 
 import com.facturacion.facturacion.Service.ProductsService;
 import com.facturacion.facturacion.Model.ProductsModel;
@@ -14,6 +14,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,9 +26,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 @RequestMapping("/Productos")
-public class ProductsController {
+public class ProductsFrontController {
     
     @Autowired
     ProductsService productsService;
@@ -36,8 +38,10 @@ public class ProductsController {
 
     @ExceptionHandler(NotFoundException.class)
     @GetMapping("/all")
-    public @ResponseBody List<ProductsModel> listarClientes(){
-        return productsService.listarProductos();
+    public String listarProductos(Model model){
+        List<ProductsModel> productos = productsService.listarProductos();
+        model.addAttribute("productos", productos);
+        return "productos";
     }
 
     @ExceptionHandler(NotFoundException.class)

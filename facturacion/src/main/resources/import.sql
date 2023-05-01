@@ -21,8 +21,8 @@ insert into products (nombre,codigo,stock,precio) values ('Harina','123456789',1
 
 --tabla facturacion
 
-insert into factura (date_factura,fk_cliente, fk_producto) values ('04/03/2023',1,1);
-insert into factura (date_factura,fk_cliente, fk_producto) values ('05/04/2022',2,2);
+insert into factura (fk_cliente, fk_producto) values (1,1);
+insert into factura (fk_cliente, fk_producto) values (2,2);
 
 
 

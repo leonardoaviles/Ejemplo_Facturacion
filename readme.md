@@ -10,13 +10,14 @@
 
 ## En progreso
 
+### Ante el cambio del precio de un producto las facturas ya generadas no deben sufrir modificaciones
+### obtener fecha actuala a la hora de crear un comprobante
+### calcular el precio total de la venta
 
-
+## CREAR CONTROOLLER PARA CARRITO Y CARRITO PRODUCTO
+## MANDAR EL ID DEL CLIENTE Y PRODUCTO PARA EL CARRITO
 
 ### YA QUEDO
 ### Agregar Validaciones - falta en el controller en el service ya quedo
 ### Modificar el post de la factura para que sea cliente, cantidad y producto - ya quedo
-### Ante el cambio del precio de un producto las facturas ya generadas no deben sufrir modificaciones -- ya quedo
-### obtener fecha actuala a la hora de crear un comprobante --- ya quedo
-### calcular el precio total de la venta -- ya quedo
 ### validaciones cliente existente, productos existentes - ya quedo

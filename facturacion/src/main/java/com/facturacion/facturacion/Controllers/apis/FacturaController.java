@@ -1,4 +1,4 @@
-package com.facturacion.facturacion.Controllers;
+package com.facturacion.facturacion.Controllers.apis;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import com.facturacion.facturacion.Service.FacturaService;
 import com.facturacion.facturacion.Model.FacturaModel;
 
 @RestController
-@RequestMapping("/facturas")
+@RequestMapping("api/facturas")
 public class FacturaController {
     
     @Autowired

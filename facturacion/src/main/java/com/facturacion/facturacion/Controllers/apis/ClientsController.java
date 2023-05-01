@@ -1,4 +1,4 @@
-package com.facturacion.facturacion.Controllers;
+package com.facturacion.facturacion.Controllers.apis;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +24,7 @@ import com.facturacion.facturacion.Repository.ClientRepository;
 import com.facturacion.facturacion.Service.ClienteService;
 
 @RestController
-@RequestMapping("/Clientes")
+@RequestMapping("api/Clientes")
 public class ClientsController {
     
     @Autowired

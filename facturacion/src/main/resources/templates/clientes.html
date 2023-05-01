@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listado de clientes</title>
+    <style>
+        table,th,td {
+            border: 1px solid black;
+        }
+    </style>
+    <h1>Clientes</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>DNI</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Facturas</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.pkClient}"></td>
+                <td th:text="${cliente.name}"></td>
+                <td th:text="${cliente.lastName}"></td>
+                <td th:text="${cliente.dni}"></td>
+                <td th:text="${cliente.adress}"></td>
+                <td th:text="${cliente.phone}"></td>
+                <td th:text="${cliente.email}"></td>
+                <td>
+                    <a th:href="@{/facturas/cliente/} + ${cliente.pkClient}" type="submit">Ver Facturas</a>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+</head>
+
+<body>
+
+</body>
+
+</html>
