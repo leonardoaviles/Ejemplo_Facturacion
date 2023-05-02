@@ -24,5 +24,9 @@ insert into products (nombre,codigo,stock,precio) values ('Harina','123456789',1
 insert into factura (fk_cliente, fk_producto) values (1,1);
 insert into factura (fk_cliente, fk_producto) values (2,2);
 
+insert into detalle_factura (date_Factura,fk_factura,precio_venta,total) values ('12/04/2023',1,50,150)
 
+insert into carrito (fk_cliente,estatus) values (1, false)
+
+insert into carrito_producto (fk_carrito, fk_producto, cantidad) values (1,1,5)
 

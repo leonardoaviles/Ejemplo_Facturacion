@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.facturacion.facturacion.Model.CarritoModel;
+import com.facturacion.facturacion.Model.CarritoProductoModel;
 import com.facturacion.facturacion.Model.ClientsModel;
 import com.facturacion.facturacion.Model.ProductsModel;
 import com.facturacion.facturacion.Repository.ClientRepository;
+import com.facturacion.facturacion.Service.CarritoService;
 import com.facturacion.facturacion.Service.ClienteService;
 import com.facturacion.facturacion.Service.ProductsService;
 
@@ -48,19 +51,7 @@ public class ClientsFrontController {
         model.addAttribute("clientes", clientes);
         return "clientes";
     }
-
-    @GetMapping("/{id}")
-    public String listarClientePorID(@PathVariable int id, Model model){
-
-        ClientsModel cliente = clienteService.listarCliente(id);
-        model.addAttribute("clientes", cliente);
-
-        List<ProductsModel> productos = productsService.listarProductos();
-
-        model.addAttribute("productos", productos);
-        return "cliente";
-    }
-
+    
     @DeleteMapping("delete/{id}")
     public void EliminarClientePorID(@PathVariable @Valid int id){
 

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class ProductsModel implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pk_producto")
     private int pkProducto;
     private String nombre;
     private String codigo;
@@ -32,9 +34,14 @@ public class ProductsModel implements Serializable{
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productsModel" , cascade = CascadeType.ALL)
     private List <FacturaModel> facturas;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productsModel" , cascade = CascadeType.ALL)
+    private List<CarritoProductoModel> carritoProductoModel;
     
     public ProductsModel(){
         this.facturas = new ArrayList<FacturaModel>();
+        this.carritoProductoModel = new ArrayList<CarritoProductoModel>();
         
     }
 

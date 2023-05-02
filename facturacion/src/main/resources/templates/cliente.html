@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
     <meta charset="UTF-8">
@@ -14,68 +14,68 @@
             align-content: center;
         }
     </style>
+</head>
 
 <body>
-    <h1>Clientes</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>DNI</th>
-                <th>Dirección</th>
-                <th>Teléfono</th>
-                <th>Email</th>
-                <th>Facturas</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h1>Crear carrito para cliente </h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>DNI</th>
+                    <th>Dirección</th>
+                    <th>Teléfono</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            <tr th:each="cliente : ${clientes}">
-                <td th:text="${cliente.pkClient}"></td>
-                <td th:text="${cliente.name}"></td>
-                <td th:text="${cliente.lastName}"></td>
-                <td th:text="${cliente.dni}"></td>
-                <td th:text="${cliente.adress}"></td>
-                <td th:text="${cliente.phone}"></td>
-                <td th:text="${cliente.email}"></td>
-                <td>
-                    <a th:href="@{/facturas/cliente/} + ${cliente.pkClient}" type="submit">Ver Facturas</a>
-                </td>
-            </tr>
+                <tr th:objec th:each="cliente : ${clientes}">
+                    <td th:field="*{clientsModel}" th:value="${cliente.pkClient}" th:text="${cliente.pkClient}"></td>
+                    <td th:text="${cliente.name}"></td>
+                    <td th:text="${cliente.lastName}"></td>
+                    <td th:text="${cliente.dni}"></td>
+                    <td th:text="${cliente.adress}"></td>
+                    <td th:text="${cliente.phone}"></td>
+                    <td th:text="${cliente.email}"></td>
+                </tr>
 
-        </tbody>
-    </table>
-    <hr>
-    <hr>
-    <hr>
-    <h1>Productos para comprar</h1>
+            </tbody>
+        </table>
+        <hr>
+        <hr>
+        <hr>
+        <h1>Productos para comprar</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Codigo</th>
-                <th>Stock</th>
-                <th>Precio</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="producto : ${productos}">
-                <td th:text="${producto.pkProducto}"></td>
-                <td th:text="${producto.Nombre}"></td>
-                <td th:text="${producto.codigo}"></td>
-                <td th:text="${producto.stock}"></td>
-                <td th:text="${producto.precio}"></td>
-                <td><a>Agregar al carrito</a></td>
-            </tr>
-        </tbody>
-    </table>
-
-    </head>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Codigo</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="producto : ${productos}">
+                    <td th:text="${producto.pkProducto}"></td>
+                    <td th:text="${producto.Nombre}"></td>
+                    <td th:text="${producto.codigo}"></td>
+                    <td th:text="${producto.stock}"></td>
+                    <td th:text="${producto.precio}"></td>
+                    <td><input size="4" th:field="*{cantidad}" type="text"></td>
+                </tr>
+                <tr>
+                    <td colspan="6"><button style="font-size: 16px; width: 350px; height: 40px;" type ="submit">Agregar al carrito</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
 
 </body>
 

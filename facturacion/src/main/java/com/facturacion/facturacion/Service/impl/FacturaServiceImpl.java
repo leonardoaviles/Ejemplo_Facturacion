@@ -34,6 +34,8 @@ public class FacturaServiceImpl implements FacturaService{
 
     @Override
     public void guardarFactura(FacturaModel facturaModel) {
+
+        
         facturaRepository.save(facturaModel);
         
     }

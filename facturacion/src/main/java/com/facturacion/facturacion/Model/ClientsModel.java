@@ -27,6 +27,7 @@ public class ClientsModel implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "pk_client")
     private int pkClient;
     @NonNull
     @Column(name = "nombre")
@@ -51,8 +52,14 @@ public class ClientsModel implements Serializable{
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "clientsModel" , cascade = CascadeType.ALL)
     private List <FacturaModel> facturas;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "clientsModel", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CarritoModel> carritoModel = new ArrayList<>();
+    
+
     public ClientsModel(){
         this.facturas = new ArrayList<FacturaModel>();
+        this.carritoModel =  new ArrayList<CarritoModel>();
     }
 
     public ClientsModel(int pkclient, String name, String lastName, String dni,String adress, String phone, String email) {
