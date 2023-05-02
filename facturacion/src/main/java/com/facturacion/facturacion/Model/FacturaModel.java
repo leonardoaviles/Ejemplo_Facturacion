@@ -9,7 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
@@ -32,20 +35,18 @@ public class FacturaModel implements Serializable{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_cliente")
     private ClientsModel clientsModel;
-    @NonNull
+
+    @OneToOne(mappedBy = "facturaModel")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_producto")
-    private ProductsModel productsModel;
+    private DetalleFacturaModel detalleFacturaModel;
 
     public FacturaModel(){
         
     }
 
-    public FacturaModel(long pkFactura, String dateFactura, ClientsModel clientsModel, ProductsModel productsModel) {
+    public FacturaModel(long pkFactura, ClientsModel clientsModel) {
         this.pkFactura = pkFactura;
         this.clientsModel = clientsModel;
-        this.productsModel = productsModel;
     }
     public long getPkFactura() {
         return pkFactura;
@@ -60,12 +61,4 @@ public class FacturaModel implements Serializable{
     public void setClientsModel(ClientsModel clientsModel) {
         this.clientsModel = clientsModel;
     }
-
-    public ProductsModel getProductsModel() {
-        return productsModel;
-    }
-    public void setProductsModel(ProductsModel productsModel) {
-        this.productsModel = productsModel;
-    }
-    
 }

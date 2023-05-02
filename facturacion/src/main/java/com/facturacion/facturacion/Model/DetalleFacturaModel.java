@@ -36,7 +36,7 @@ public class DetalleFacturaModel {
 
     @NonNull
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_factura")
     private FacturaModel facturaModel;
 

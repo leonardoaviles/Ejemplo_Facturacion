@@ -29,23 +29,18 @@ public class ProductsModel implements Serializable{
     private String nombre;
     private String codigo;
     private int stock;
-    private int precio;
-    
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "productsModel" , cascade = CascadeType.ALL)
-    private List <FacturaModel> facturas;
+    private double precio;
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "productsModel" , cascade = CascadeType.ALL)
     private List<CarritoProductoModel> carritoProductoModel;
     
     public ProductsModel(){
-        this.facturas = new ArrayList<FacturaModel>();
         this.carritoProductoModel = new ArrayList<CarritoProductoModel>();
         
     }
 
-    public ProductsModel(int pkProducto, String nombre, String codigo, int stock, int precio) {
+    public ProductsModel(int pkProducto, String nombre, String codigo, int stock, double precio) {
         this.pkProducto = pkProducto;
         this.nombre = nombre;
         this.codigo = codigo;
@@ -77,10 +72,10 @@ public class ProductsModel implements Serializable{
     public void setStock(int stock) {
         this.stock = stock;
     }
-    public int getPrecio() {
+    public double getPrecio() {
         return precio;
     }
-    public void setPrecio(int precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
     

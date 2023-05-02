@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.facturacion.facturacion.Model.CarritoModel;
 import com.facturacion.facturacion.Model.CarritoProductoModel;
 import com.facturacion.facturacion.Model.ClientsModel;
+import com.facturacion.facturacion.Repository.CarritoProductoRepository;
 import com.facturacion.facturacion.Repository.CarritoRepository;
 import com.facturacion.facturacion.Repository.ClientRepository;
 import com.facturacion.facturacion.Service.CarritoService;
@@ -37,27 +39,29 @@ public class CarritoController {
     @Autowired
     CarritoRepository carritoRepository;
 
+    @Autowired
+    CarritoProductoRepository carritoProductoRepository;
+
     @GetMapping("/all")
-    public @ResponseBody List<CarritoModel> listarCarritos(){
+    public @ResponseBody List<CarritoModel> listarCarritos() {
 
         return carritoService.listarCarritos();
     }
 
-    @PostMapping("/{id}")
-    public void crearCarritoPorId(@PathVariable int id) {
+    @GetMapping("CPM/all")
+    public @ResponseBody List<CarritoProductoModel> listarCarritos2() {
 
-        ClientsModel clientsModel = clientRepository.findById(id).get();
-
-        Optional<CarritoModel> optional = carritoRepository.findByClientsModel(clientsModel);
-
-        if (!optional.isPresent() || optional.get().getStatus() == false) {
-
-            CarritoModel carritoModel = new CarritoModel();
-            carritoModel.setStatus(true);
-            carritoModel.setClientsModel(clientsModel);
-            
-
-            carritoService.guardarCarrito(carritoModel);
-        }
+        return (List<CarritoProductoModel>) carritoProductoRepository.findAll();
     }
+
+    @PostMapping("/save")
+    public void crearCarritoPorId(@RequestBody CarritoProductoModel carritoProductoModel) {
+
+        ClientsModel clientsModel = carritoProductoModel.getCarritoModel().getClientsModel();
+        CarritoModel carritoModel = new CarritoModel();
+
+        carritoModel.setClientsModel(clientsModel);
+        carritoService.guardarCarrito(carritoModel, carritoProductoModel);
+    }
+
 }

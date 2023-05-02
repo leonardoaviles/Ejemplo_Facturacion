@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,7 +26,7 @@ public class CarritoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name ="pk_carrito")
-    private Long id;
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
@@ -37,8 +38,7 @@ public class CarritoModel {
 
     @OneToMany(mappedBy = "carritoModel", cascade = CascadeType.ALL)
     @JsonIgnore
-    List<CarritoProductoModel> carritoProductoModel;
-
+    private List<CarritoProductoModel> carritoProductoModel;
 
     public CarritoModel(){
         this.carritoProductoModel = new ArrayList<CarritoProductoModel>();
@@ -53,11 +53,11 @@ public class CarritoModel {
 
 
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 

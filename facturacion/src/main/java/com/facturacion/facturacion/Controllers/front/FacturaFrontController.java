@@ -70,5 +70,4 @@ public class FacturaFrontController {
         facturaService.guardarFactura(FacturaModel);
     }
 
-
 }
