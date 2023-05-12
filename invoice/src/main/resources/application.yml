@@ -1,5 +1,0 @@
-spring:
-  application:
-    nameL: Invoices
-server:
-  port: 8080
