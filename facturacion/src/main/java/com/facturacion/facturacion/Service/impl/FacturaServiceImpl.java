@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.facturacion.facturacion.Model.CarritoModel;
 import com.facturacion.facturacion.Model.CarritoProductoModel;
-import com.facturacion.facturacion.Model.ClientsModel;
 import com.facturacion.facturacion.Model.DetalleFacturaModel;
 import com.facturacion.facturacion.Model.FacturaModel;
 import com.facturacion.facturacion.Model.ProductsModel;

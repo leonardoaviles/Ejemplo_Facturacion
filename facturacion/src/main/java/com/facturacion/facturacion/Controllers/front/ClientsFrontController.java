@@ -19,15 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.facturacion.facturacion.Model.CarritoModel;
-import com.facturacion.facturacion.Model.CarritoProductoModel;
 import com.facturacion.facturacion.Model.ClientsModel;
-import com.facturacion.facturacion.Model.ProductsModel;
 import com.facturacion.facturacion.Repository.ClientRepository;
-import com.facturacion.facturacion.Service.CarritoService;
 import com.facturacion.facturacion.Service.ClienteService;
 import com.facturacion.facturacion.Service.ProductsService;
 

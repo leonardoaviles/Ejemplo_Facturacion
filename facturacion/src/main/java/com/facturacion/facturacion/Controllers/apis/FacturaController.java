@@ -15,12 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.facturacion.facturacion.Service.ClienteService;
 import com.facturacion.facturacion.Service.FacturaService;
-import com.facturacion.facturacion.Model.CarritoModel;
 import com.facturacion.facturacion.Model.ClientsModel;
 import com.facturacion.facturacion.Model.FacturaModel;
-import com.facturacion.facturacion.Repository.CarritoRepository;
 import com.facturacion.facturacion.Repository.ClientRepository;
 import com.facturacion.facturacion.Repository.FacturaRepository;
 
