@@ -7,7 +7,6 @@ import com.facturacion.facturacion.Model.ClientsModel;
 import com.facturacion.facturacion.Model.FacturaModel;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface FacturaRepository extends CrudRepository<FacturaModel,Long>{
