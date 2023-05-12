@@ -1,9 +1,8 @@
 package com.facturacion.facturacion.Model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,17 +10,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.springframework.lang.NonNull;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import lombok.Data;
 
 @Entity
 @Table(name = "factura")
+@Data
 public class FacturaModel implements Serializable{
 
     private static final long serialVersionUID = 1L;
@@ -30,54 +30,32 @@ public class FacturaModel implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_factura")
     private long pkFactura;
-    @NonNull
-    @Column(name = "date_factura")
-    private String dateFactura;
-    @NonNull
+
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_cliente")
     private ClientsModel clientsModel;
-    @NonNull
+
+    @OneToOne
+    @JoinColumn(name = "fk_carrito")
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_producto")
-    private ProductsModel productsModel;
+    private CarritoModel carritoModel;
+
+    @Column(name = "date_factura")
+    private String dateFactura;
+
+    @OneToOne(mappedBy = "facturaModel", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private DetalleFacturaModel detalleFacturaModel;
 
     public FacturaModel(){
+        this.detalleFacturaModel = new DetalleFacturaModel();
         
     }
 
-    public FacturaModel(long pkFactura, String dateFactura, ClientsModel clientsModel, ProductsModel productsModel) {
+    public FacturaModel(long pkFactura, ClientsModel clientsModel, CarritoModel carritoModel) {
         this.pkFactura = pkFactura;
-        this.dateFactura = dateFactura;
         this.clientsModel = clientsModel;
-        this.productsModel = productsModel;
+        this.carritoModel = carritoModel;
     }
-    public long getPkFactura() {
-        return pkFactura;
-    }
-    public void setPkFactura(long pkFactura) {
-        this.pkFactura = pkFactura;
-    }
-    public String getDateFactura() {
-        return dateFactura;
-    }
-    public void setDateFactura(String dateFactura) {
-        this.dateFactura = dateFactura;
-    }
-    public ClientsModel getClientsModel() {
-        return clientsModel;
-    }
-    public void setClientsModel(ClientsModel clientsModel) {
-        this.clientsModel = clientsModel;
-    }
-
-    public ProductsModel getProductsModel() {
-        return productsModel;
-    }
-    public void setProductsModel(ProductsModel productsModel) {
-        this.productsModel = productsModel;
-    }
-    
 }

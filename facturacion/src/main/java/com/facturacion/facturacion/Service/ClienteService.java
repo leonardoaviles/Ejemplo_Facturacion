@@ -8,6 +8,7 @@ public interface ClienteService {
     public ClientsModel listarCliente(int id);
     public List<ClientsModel> listarClientes();
     public void eliminarCliente(int id);
-    public void guardarCliente(ClientsModel clientsModel);
+    public boolean guardarCliente(ClientsModel clientsModel);
 
 }
+
